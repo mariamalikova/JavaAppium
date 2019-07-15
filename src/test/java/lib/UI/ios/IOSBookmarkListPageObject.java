@@ -2,6 +2,7 @@ package lib.UI.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.UI.pageObjects.BookmarkListPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSBookmarkListPageObject extends BookmarkListPageObject {
 
@@ -9,7 +10,7 @@ public class IOSBookmarkListPageObject extends BookmarkListPageObject {
 		ARTICLE_TITLE = "xpath://XCUIElementTypeLink[contains(@name, '{ARTICLE_TITLE}')]";
 	}
 
-	public IOSBookmarkListPageObject(AppiumDriver driver){
+	public IOSBookmarkListPageObject(RemoteWebDriver driver){
 		super(driver);
 	}
 }

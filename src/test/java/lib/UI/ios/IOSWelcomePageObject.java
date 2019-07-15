@@ -2,6 +2,7 @@ package lib.UI.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.UI.pageObjects.WelcomePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSWelcomePageObject extends WelcomePageObject {
 
@@ -15,7 +16,7 @@ public class IOSWelcomePageObject extends WelcomePageObject {
 		SKIP = "xpath://*[@name ='Skip']";
 	}
 
-	public IOSWelcomePageObject(AppiumDriver driver){
+	public IOSWelcomePageObject(RemoteWebDriver driver){
 		super(driver);
 	}
 }

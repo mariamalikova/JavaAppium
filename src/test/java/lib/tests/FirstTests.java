@@ -12,6 +12,9 @@ import java.util.List;
 
 public class FirstTests extends CoreTestCase {
 
+	private static final String LOGIN = "MariaAppium";
+	private static final String PASS = "qweASD123";
+
 	private MainPageObject mainPAgeObject;
 
 	protected void setUp() throws Exception{
@@ -64,8 +67,9 @@ public class FirstTests extends CoreTestCase {
 
 	// Ex 5
 	// EX 11
+	// EX 17
 	@Test
-	public void testSaveTwoArticlesToMyList() {
+	public void testSaveTwoArticlesToMyList() throws InterruptedException {
 
 		String folderName = "Learning programming";
 		String firstArticleTitle = "Java";
@@ -79,9 +83,18 @@ public class FirstTests extends CoreTestCase {
 
 		searchPageObject.initSearchInput();
 		searchPageObject.typeSearchLine(firstArticleTitle);
-		searchPageObject.clickForSearchResult("Object-oriented programming language");
+		searchPageObject.clickForSearchResult("programming language");
 
-		if (Platform.getInstance().isAndroid()){
+		if(Platform.getInstance().isMV()){
+			articlePageObject.addArticleToMySaved();
+			AuthorizationPageObject authPO = new AuthorizationPageObject(driver);
+			authPO.clickAuthButton();
+			authPO.enterLoginData(LOGIN, PASS);
+			authPO.submitForm();
+			articlePageObject.waitForTitleElement();
+			assertTrue("we are not on the same page after login", articlePageObject.getArticleTitle().contains(firstArticleTitle));
+			articlePageObject.addArticleToMySaved();
+		} else if (Platform.getInstance().isAndroid()){
 			articlePageObject.addArticleToBookmarksAndCreateList(folderName);
 			articlePageObject.returnToMainScreen();
 		} else if (Platform.getInstance().isIOS()){
@@ -95,7 +108,10 @@ public class FirstTests extends CoreTestCase {
 		searchPageObject.clickForSearchResult("programming language");
 
 
-		if (Platform.getInstance().isAndroid()){
+		if(Platform.getInstance().isMV()){
+			articlePageObject.addArticleToMySaved();
+			articlePageObject.openMyLists();
+		} else if (Platform.getInstance().isAndroid()){
 			articlePageObject.addArticleToBookmarks(folderName);
 			articlePageObject.returnToMainScreen();
 			mainPAgeObject.openBookmarks();
@@ -112,7 +128,7 @@ public class FirstTests extends CoreTestCase {
 			bookmarkPageObject.openArticle(firstArticleTitle);
 			String articleSubtitle = articlePageObject.getArticleSubtitle();
 			Assert.assertEquals("Title does not match. Expected: " + firstArticleSubtitle + ", actual: " + articleSubtitle, firstArticleSubtitle, articleSubtitle);
-		} else if (Platform.getInstance().isIOS()) {
+		} else if ((Platform.getInstance().isIOS()) || (Platform.getInstance().isMV())) {
 			bookmarkPageObject.checkArticlePresentInList(firstArticleTitle);
 			bookmarkPageObject.checkArticleNotPresentInList(secondArticleTitle);
 		}
@@ -135,6 +151,10 @@ public class FirstTests extends CoreTestCase {
 	// Ex 7
 	@Test
 	public void testChangeScreenOrientationOnSearchResults() {
+
+		if (Platform.getInstance().isMV()){
+			return;
+		}
 
 		SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 		ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
@@ -177,7 +197,7 @@ public class FirstTests extends CoreTestCase {
 	@Test
 	public void testPassThroughWelcome(){
 
-		if (Platform.getInstance().isAndroid()){
+		if ((Platform.getInstance().isAndroid()) || (Platform.getInstance().isMV()) ){
 			return;
 		}
 

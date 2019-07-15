@@ -2,6 +2,7 @@ package lib.UI.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.UI.pageObjects.ArticlePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSArticlePageObject extends ArticlePageObject {
 
@@ -12,7 +13,7 @@ public class IOSArticlePageObject extends ArticlePageObject {
 		CLOSE_DIALOG_BUTTON = "xpath://XCUIElementTypeButton[@name='places auth close']";
 	}
 
-	public IOSArticlePageObject(AppiumDriver driver){
+	public IOSArticlePageObject(RemoteWebDriver driver){
 		super(driver);
 	}
 }

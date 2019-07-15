@@ -1,10 +1,13 @@
 package lib.UI.pageObjects;
 
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import lib.Platform;
+import netscape.javascript.JSException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -243,4 +246,31 @@ abstract public class MainPageObject {
 			System.out.println("Method 'pressByCoordinates' do nothing for platform" + Platform.getInstance().getPlatformVar());
 		}
 	}
+
+	public void scrollWebPageApp() {
+		if (Platform.getInstance().isMV()){
+			JavascriptExecutor JSExecutor = (JavascriptExecutor) driver;
+			JSExecutor.executeScript("window.scrollBy(0, 250)");
+		} else {
+			System.out.println("Method 'scrollWebPageApp' do nothing for platform" + Platform.getInstance().getPlatformVar());
+		}
+	}
+
+	public void tryClickElementWithFewAttempts(String locatior, String error_message, int amount_of_attempts){
+		int current_attempts = 0;
+		boolean need_more_attempts = true;
+
+		while (need_more_attempts) {
+			try {
+				this.waitForElementAndClick(locatior, error_message, 1);
+				need_more_attempts = false;
+			} catch (Exception ex) {
+				if (current_attempts > amount_of_attempts) {
+					this.waitForElementAndClick(locatior, error_message, 1);
+				}
+			}
+			++ current_attempts;
+		}
+	}
+
 }

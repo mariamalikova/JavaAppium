@@ -1,7 +1,9 @@
 package lib.UI.pageObjects;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ abstract public class SearchPageObject extends MainPageObject {
 			SEARCH_CLOSE_BUTTON,
 			SEARCH_RESULT_BY_TITLE_AND_SUBTITLE;
 
-	public SearchPageObject(AppiumDriver driver){
+	public SearchPageObject(RemoteWebDriver driver){
 		super(driver);
 	}
 
@@ -45,7 +47,13 @@ abstract public class SearchPageObject extends MainPageObject {
 
 	public void clickForSearchResult(String substring){
 		String search_result_xpath = getResultSearchElement(substring);
-		this.waitForElementAndClick(search_result_xpath, "Cannot find search result", 10);
+
+		if (Platform.getInstance().isMV()){
+			this.tryClickElementWithFewAttempts(search_result_xpath, "Cannot find search result", 5);
+		}
+		else {
+			this.waitForElementAndClick(search_result_xpath, "Cannot find search result", 15);
+		}
 	}
 
 	public List<WebElement> getSearchResult(){

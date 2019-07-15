@@ -5,10 +5,11 @@ import lib.Platform;
 import lib.UI.android.AndroidWelcomePageObject;
 import lib.UI.ios.IOSWelcomePageObject;
 import lib.UI.pageObjects.WelcomePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WelcomePageObjectFactory {
 
-	public static WelcomePageObject get(AppiumDriver driver){
+	public static WelcomePageObject get(RemoteWebDriver driver){
 
 		if(Platform.getInstance().isAndroid()) {
 			return new AndroidWelcomePageObject(driver);

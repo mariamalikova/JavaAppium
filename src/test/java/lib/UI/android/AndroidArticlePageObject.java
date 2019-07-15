@@ -2,6 +2,7 @@ package lib.UI.android;
 
 import io.appium.java_client.AppiumDriver;
 import lib.UI.pageObjects.ArticlePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AndroidArticlePageObject extends ArticlePageObject {
 
@@ -17,7 +18,7 @@ public class AndroidArticlePageObject extends ArticlePageObject {
 		ARTICLE_SUBTITLE = "xpath://*[@resource-id='pagelib_edit_section_title_description']";
 	}
 
-	public AndroidArticlePageObject(AppiumDriver driver){
+	public AndroidArticlePageObject(RemoteWebDriver driver){
 		super(driver);
 	}
 }

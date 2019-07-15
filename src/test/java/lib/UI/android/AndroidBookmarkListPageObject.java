@@ -2,6 +2,7 @@ package lib.UI.android;
 
 import io.appium.java_client.AppiumDriver;
 import lib.UI.pageObjects.BookmarkListPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AndroidBookmarkListPageObject extends BookmarkListPageObject {
 
@@ -9,7 +10,7 @@ public class AndroidBookmarkListPageObject extends BookmarkListPageObject {
 		ARTICLE_TITLE = "xpath://*[contains(@text, '{ARTICLE_TITLE}')]";
 	}
 
-	public AndroidBookmarkListPageObject(AppiumDriver driver){
+	public AndroidBookmarkListPageObject(RemoteWebDriver driver){
 		super(driver);
 	}
 }

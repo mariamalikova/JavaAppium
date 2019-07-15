@@ -2,6 +2,7 @@ package lib.UI.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.UI.pageObjects.SearchPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSSearchPageObject extends SearchPageObject {
 
@@ -13,7 +14,7 @@ public class IOSSearchPageObject extends SearchPageObject {
 			SEARCH_CLOSE_BUTTON = "xpath://XCUIElementTypeButton[@name='Close']";
 		}
 
-	public IOSSearchPageObject(AppiumDriver driver){
+	public IOSSearchPageObject(RemoteWebDriver driver){
 			super(driver);
 		}
 

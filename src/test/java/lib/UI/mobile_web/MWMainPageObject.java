@@ -1,16 +1,15 @@
-package lib.UI.android;
+package lib.UI.mobile_web;
 
-import io.appium.java_client.AppiumDriver;
 import lib.UI.pageObjects.MainPageObject;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class AndroidMainPageObject extends MainPageObject {
+public class  MWMainPageObject extends MainPageObject {
 
 	static {
 		MY_LIST_BUTTON = "xpath://*[contains(@text, '{TITLE}')]/following-sibling::*[contains(@text, '{SUBTITLE}')]/parent::*";
 	}
 
-	public AndroidMainPageObject(RemoteWebDriver driver){
+	public MWMainPageObject(RemoteWebDriver driver){
 		super(driver);
 	}
 }
